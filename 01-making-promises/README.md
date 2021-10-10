@@ -1,4 +1,5 @@
 # Making Promises
+test2
 
 Soooooo.....
 
@@ -10,7 +11,7 @@ From a somewhat mechanical perspective, promises are simple state machines with 
 * Resolved
 * Rejected
 
-Resolved and rejected are *final* states, which means that once a promise gets to one of these states, it absolutely cannot go to any other state. Pending can go either way.  A promise that is either resolved or rejected may also have a *payload*, a value that it carries.  It's a little like an array that can only contain one value.  It's entirely possible that that value will be `undefined`, but that's still a value.
+Resolved and rejected are *final* states, which means that once a promise gets to one of these states, it absolutely cannot go to any other state. Pending can go either way.  A promise that is either resolved or rejected may also have a *payload*, a value that it carries.  It's a little like an array that can only contain one value.  Ifgitt's entirely possible that that value will be `undefined`, but that's still a value.
 
 How we access these values is the subject of a future chapter of exercises.  For now, we're going to focus on the mechanisms for making promises.
 
