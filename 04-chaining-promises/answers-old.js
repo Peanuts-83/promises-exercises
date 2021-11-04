@@ -8,16 +8,15 @@
 function flatMapPromise(promise, asyncTransformer) {
   return new Promise((resolve, reject) => {
     promise
-      .then(/* IMPLEMENT ME! */
-        (data) => {
-          resolve(asyncTransformer(data));
-        }
-      )
+      .then((data) => {
+        resolve(asyncTransformer(data));
+      })
       .catch((error) => {
         reject(error);
       });
   });
 }
+
 /**
  *
  * EXERCISE 2
@@ -26,14 +25,13 @@ function flatMapPromise(promise, asyncTransformer) {
  * @param {function} slowAsyncProcess
  */
 function chainTwoAsyncProcesses(firstPromise, slowAsyncProcess) {
-  return firstPromise
-    .then(/* IMPLEMENT ME! */
-      (data) => {
-        return new Promise((resolve) => {
-          resolve (slowAsyncProcess(data));
-        });
-      }
-    );
+  return firstPromise.then((data) => {
+    return new Promise((res, rej) => {
+      slowAsyncProcess(data)
+        .then((value) => { res(value); })
+        .catch((error) => { rej(error); });
+    })
+  });
 }
 
 /**
@@ -45,21 +43,19 @@ function chainTwoAsyncProcesses(firstPromise, slowAsyncProcess) {
  */
 function makeGetUserByIdWithOrganization(getUserById, getOrganizationById) {
   return function getUserByIdWithOrganization(userId) {
-    /* IMPLEMENT ME! */
     return getUserById(userId)
-      .catch((error) => {
-        throw(error);
+      .then((data) => {
+        return new Promise((resolve, reject) => {
+          let orgId = data['organizationId'];
+          getOrganizationById(orgId)
+            .then((organization) => {
+              data['organization'] = organization;
+              resolve(data);
+            })
+            .catch(() => reject());
+        });
       })
-      .then((user) => {
-        return getOrganizationById(user['organizationId'])
-          .then((organization) => {
-            user['organization'] = organization;
-            return user;
-          });
-      })
-      .catch((error) => {
-        Promise.resolve(error);
-      });
+      .catch((error) => { Promise.reject(error); });
   };
 }
 
