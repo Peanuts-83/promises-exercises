@@ -14,7 +14,7 @@
  * @param {handler} handler 
  */
 function consumePromise(promise, consumer, handler){
-  promise.then(res => consumer(res)).catch(err => handler(err))
+  /* IMPLEMENT ME! */
 }
 
 /**
@@ -60,12 +60,7 @@ function consumePromise(promise, consumer, handler){
  */
 function mapPromise(promise, transformer){
   return new Promise((resolve, reject) => {
-    promise 
-      .then(res => {
-        return transformer(res);
-      })
-      .then(res => resolve(res))
-      .catch(err => reject(err))
+    /* IMPLEMENT ME!! */
   });
 }
 
@@ -89,17 +84,7 @@ function mapPromise(promise, transformer){
  */
 function squarePromise(numberPromise){
   return numberPromise
-    .then(res => {
-      if (typeof res === 'string') {
-        if (!isNaN(parseInt(res)) === true) {
-          return Math.pow(parseInt(res), 2);
-        }
-        throw `Cannot convert '${res}' to a number!`;
-      }
-      return Math.pow(res, 2);
-      
-    })
-    .catch(err => {throw(err)});
+    .then(/* IMPLEMENT ME! */);
 }
 
 /**
@@ -114,9 +99,7 @@ function squarePromise(numberPromise){
  */
 function squarePromiseOrZero(promise){
   return squarePromise(promise)
-    .catch((err) => {
-      return 0;      
-    })
+    .catch(/* IMPLEMENT ME! */);
 }
 
 /**
@@ -145,11 +128,7 @@ function squarePromiseOrZero(promise){
  * @returns {Promise}
  */
 function switcheroo(promise){
-  return promise
-    .then(
-      res => {throw(res)},
-      err => {return(err)}
-    );
+  return promise.then(/* IMPLEMENT ME */);
 }
 
 /**
