@@ -8,8 +8,7 @@
  */
 function waitForPromise(promise, action) {
   /* IMPLEMENT ME */
-  promise
-    .then(() => { action();} );
+  return promise.then((data) => action(data));
 }
 /**
  *
@@ -22,7 +21,7 @@ function waitForPromise(promise, action) {
 function consumePromise(promise, consumer, handler) {
   /* IMPLEMENT ME! */
   promise
-    .then((data) => consumer(data))
+    .then((result) => consumer(result))
     .catch((error) => handler(error));
 }
 
